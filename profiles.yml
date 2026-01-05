@@ -7,6 +7,6 @@ retail_analytics:
       user: "{{ env_var('DB_USER') }}"
       pass: "{{ env_var('DB_PASSWORD') }}"
       dbname: "{{ env_var('DB_NAME') }}"
-      port: 5432
+      port: 6543
       schema: analytics
       threads: 1
