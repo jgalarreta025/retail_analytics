@@ -1,0 +1,41 @@
+name: Ejecución Diaria dbt
+
+on:
+  workflow_dispatch: # Permite botón manual
+  schedule:
+    - cron: '0 8 * * *' # Se ejecuta a las 8:00 AM UTC todos los días
+
+jobs:
+  run_dbt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v3
+
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dbt
+        run: pip install dbt-postgres
+
+      - name: Instalar dependencias dbt
+        run: dbt deps
+
+      - name: Ejecutar dbt Run
+        run: dbt run --profiles-dir .
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+
+      - name: Ejecutar dbt Test
+        run: dbt test --profiles-dir .
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}

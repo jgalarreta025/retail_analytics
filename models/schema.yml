@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: customers_with_orders
+    description: "Tabla resumen que une clientes con sus métricas de ventas agregadas."
+    columns:
+      - name: customer_id
+        description: "Clave primaria del cliente."
+        tests:
+          - unique
+          - not_null
+      
+      - name: first_name
+        description: "Nombre de pila del cliente."
+      
+      - name: total_amount
+        description: "Suma total del valor de todos los pedidos históricos (en USD)."
