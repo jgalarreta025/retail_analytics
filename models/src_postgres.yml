@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: mi_tienda  # Nombre lógico en dbt
-    database: test # Nombre real de la BD
+    database: postgres # Nombre real de la BD
     schema: raw_data # Esquema donde creamos los datos en el Paso 2
     tables:
       - name: customers

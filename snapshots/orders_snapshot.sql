@@ -2,7 +2,7 @@
 
 {{
     config(
-      target_database='test',
+      target_database='postgres',
       target_schema='snapshots',
       unique_key='id',
       
